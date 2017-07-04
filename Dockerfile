@@ -88,7 +88,9 @@ RUN set -e \
 
 EXPOSE 8080
 
-RUN chown :root $CATALINA_HOME
-RUN chmod -R g+rwX $CATALINA_HOME
+RUN rm -rf $CATALINA_HOME/webapps \
+    && mkdir $CATALINA_HOME/webapps \
+    && chown :root $CATALINA_HOME \
+    && chmod -R g+rwX $CATALINA_HOME 
 
 CMD ["catalina.sh", "run"]
